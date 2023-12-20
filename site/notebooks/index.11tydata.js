@@ -19,7 +19,7 @@ function titlePages({ subjects, subjectSets, workflows }) {
   return firstPages.map(titlePage).filter(Boolean)
 }
 
-module.exports = {
+export default {
   eleventyComputed: {
     titlePages
   }

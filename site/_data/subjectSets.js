@@ -1,4 +1,4 @@
-const fetchWithRetry = require('./fetchWithRetry')
+import fetchWithRetry from './fetchWithRetry.js'
 
 /*
 Fetches ALL Subject Sets from a Project.
@@ -47,4 +47,4 @@ async function fetchSubjectSetsByPage(query, page = 1, pageSize = 100) {
   }
 }
 
-module.exports = fetchAllSubjectSets({ project_id: '9006' })
+export default fetchAllSubjectSets({ project_id: '9006' })

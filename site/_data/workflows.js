@@ -1,4 +1,4 @@
-const fetchWithRetry = require('./fetchWithRetry')
+import fetchWithRetry from './fetchWithRetry.js'
 
 /*
 Fetches ALL Workflows from a Project.
@@ -47,4 +47,4 @@ async function fetchWorkflowsByPage(query, page = 1, pageSize = 100) {
   }
 }
 
-module.exports = fetchAllWorkflows({ project_id: '9006' })
+export default fetchAllWorkflows({ project_id: '9006' })

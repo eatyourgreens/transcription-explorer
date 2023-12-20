@@ -33,7 +33,7 @@ function workflow({ subject, subjectSets, workflows }) {
   return null
 }
 
-module.exports = {
+export default {
   eleventyComputed: {
     title: subjectTitle,
     subjectLocations,

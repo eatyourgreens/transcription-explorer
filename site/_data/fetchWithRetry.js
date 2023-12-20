@@ -1,4 +1,5 @@
-const { panoptes } = require('@zooniverse/panoptes-js')
+import { panoptes } from '@zooniverse/panoptes-js'
+
 const MAX_TRIES = 5
 const DELAY = 2000
 
@@ -33,7 +34,7 @@ function fetchWithDelay(endpoint, query, delay = DELAY) {
   })
 }
 
-module.exports = async function fetchWithRetry(endpoint, query = {}, retryCount = 0, delay = 0) {
+export default async function fetchWithRetry(endpoint, query = {}, retryCount = 0, delay = 0) {
   try {
     if (retryCount > 0) {
       const queryParams = Object.entries(query).map(([key, value]) => `${key}=${value}`)

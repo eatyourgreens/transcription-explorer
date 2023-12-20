@@ -1,7 +1,9 @@
-module.exports = function (eleventyConfig) {
+import PageMetadata from './components/PageMetadata.js'
+
+export default function (eleventyConfig) {
   eleventyConfig.addLayoutAlias("default", "layouts/default.njk");
 
-  eleventyConfig.addShortcode("PageMetadata", require('./components/PageMetadata'));
+  eleventyConfig.addShortcode("PageMetadata", PageMetadata);
 
   return {
     templateFormats: [

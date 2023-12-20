@@ -13,7 +13,7 @@ function metaImage(ogImage) {
   `;
 }
 
-module.exports = function({ page, title = 'Read Davy\'s Notebooks', description, ogImage }){
+export default function({ page, title = 'Read Davy\'s Notebooks', description, ogImage }){
   return `
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
