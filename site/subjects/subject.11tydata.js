@@ -16,9 +16,11 @@ function ogImage({ subject }) {
 
 function description({ subject, subjectSets, workflows }) {
   const w = workflow({ subject, subjectSets, workflows })
+  const [subjectSetID] = subject.links.subject_sets
+  const subjectSet = subjectSets.find(s => s.id == subjectSetID)
   const pageNumber = subject.metadata['#priority']
   if (w) {
-    return `${w.display_name} page ${pageNumber}`
+    return `${w.display_name} ${subjectSet.display_name} page ${pageNumber}`
   }
   return `Notebook not found for page ${pageNumber}`
 }

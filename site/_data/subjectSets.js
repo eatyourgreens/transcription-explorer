@@ -36,7 +36,8 @@ async function fetchSubjectSetsByPage(query, page = 1, pageSize = 100) {
     const { subject_sets, meta }  = await fetchWithRetry('/subject_sets', {
       ...query,
       page,
-      page_size: pageSize
+      page_size: pageSize,
+      order: 'id'
     })
     return { subject_sets, meta: meta.subject_sets }
   } catch (err) {
@@ -47,4 +48,4 @@ async function fetchSubjectSetsByPage(query, page = 1, pageSize = 100) {
   }
 }
 
-export default fetchAllSubjectSets({ project_id: '9006' })
+export default fetchAllSubjectSets({ project_id: '15597' })

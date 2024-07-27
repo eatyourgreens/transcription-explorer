@@ -1,2 +1,2 @@
-# Read Davy's notebooks
-Explore the subject pages from the Davy Notebooks Project. Every subject has a URL like: `{site-root}/subjects/{subject-ID}`.
+# Transcription Explorer
+Explore the subject pages from Zooniverse transcription projects. Every subject has a URL like: `{site-root}/subjects/{subject-ID}`.

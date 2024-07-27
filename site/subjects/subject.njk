@@ -4,13 +4,13 @@ pagination:
   data: subjects
   size: 1
   alias: subject
-permalink: "/subjects/{{ subject.id}}/"
+permalink: "/pmlogan/poets-and-lovers/subjects/{{ subject.id}}/"
 ---
 <nav aria-label="Page navigation">
   <ol>
-    <li>{% if pagination.href.previous %}<a href="/read-davy-notebooks{{ pagination.href.previous }}">Previous</a>{% else %}Previous{% endif %}</li>
-    <li><a href="/read-davy-notebooks/notebooks/">Davy's Notebooks</a></li>
-    <li>{% if pagination.href.next %}<a href="/read-davy-notebooks{{ pagination.href.next }}">Next</a>{% else %}Next{% endif %}</li>
+    <li>{% if pagination.href.previous %}<a href="/transcription-explorer{{ pagination.href.previous }}">Previous</a>{% else %}Previous{% endif %}</li>
+    <li><a href="/transcription-explorer/pmlogan/poets-and-lovers/volumes/">Transcribed Volumes</a></li>
+    <li>{% if pagination.href.next %}<a href="/transcription-explorer{{ pagination.href.next }}">Next</a>{% else %}Next{% endif %}</li>
   </ol>
 </nav>
 <main class="subject" aria-labelledby="page-heading">
@@ -18,7 +18,7 @@ permalink: "/subjects/{{ subject.id}}/"
     <div class="subjectGrid">
       <section aria-labelledby="subject-heading">
         <h2 id="subject-heading">
-          <a href="https://www.zooniverse.org/projects/humphrydavy/davy-notebooks-project/talk/subjects/{{ subject.id }}">
+          <a href="https://www.zooniverse.org/projects/pmlogan/poets-and-lovers/talk/subjects/{{ subject.id }}">
             Subject {{ subject.id }}
           </a>
         </h2>
@@ -42,9 +42,9 @@ permalink: "/subjects/{{ subject.id}}/"
     </div>
     <nav aria-label="Page navigation">
       <ol>
-        <li>{% if pagination.href.previous %}<a href="/read-davy-notebooks{{ pagination.href.previous }}">Previous</a>{% else %}Previous{% endif %}</li>
-        <li><a href="/read-davy-notebooks/notebooks/">Davy's Notebooks</a></li>
-        <li>{% if pagination.href.next %}<a href="/read-davy-notebooks{{ pagination.href.next }}">Next</a>{% else %}Next{% endif %}</li>
+        <li>{% if pagination.href.previous %}<a href="/transcription-explorer{{ pagination.href.previous }}">Previous</a>{% else %}Previous{% endif %}</li>
+        <li><a href="/transcription-explorer/pmlogan/poets-and-lovers/volumes/">Transcribed Volumes</a></li>
+        <li>{% if pagination.href.next %}<a href="/transcription-explorer{{ pagination.href.next }}">Next</a>{% else %}Next{% endif %}</li>
       </ol>
     </nav>
     <script>

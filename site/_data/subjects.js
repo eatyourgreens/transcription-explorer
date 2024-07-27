@@ -20,7 +20,7 @@ async function fetchAllSubjects(query) {
 
   const uniqueSubjects = [...new Set(allSubjects)]
   console.log('subjects:', uniqueSubjects.length)
-  return uniqueSubjects.reverse()
+  return uniqueSubjects.sort((a, b) => parseInt(a.id) - parseInt(b.id));
 }
 
 /*
@@ -36,7 +36,8 @@ async function fetchSubjectsByPage(query, page = 1, pageSize = 100) {
     const { subjects, meta }  = await fetchWithRetry('/subjects', {
       ...query,
       page,
-      page_size: pageSize
+      page_size: pageSize,
+      order: 'id'
     })
     return { subjects, meta: meta.subjects }
   } catch (err) {
@@ -47,4 +48,4 @@ async function fetchSubjectsByPage(query, page = 1, pageSize = 100) {
   }
 }
 
-export default fetchAllSubjects({ project_id: '9006' })
+export default fetchAllSubjects({ project_id: '15597' })

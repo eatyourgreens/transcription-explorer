@@ -1,7 +1,7 @@
 {
-  "name": "read-davy-notebooks",
+  "name": "transcription-explorer",
   "version": "0.1.0",
-  "description": "Read Zooniverse transcriptions of Davy's notebooks.",
+  "description": "Read Zooniverse volunteer transcriptions.",
   "main": "index.js",
   "type": "module",
   "scripts": {

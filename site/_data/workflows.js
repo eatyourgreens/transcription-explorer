@@ -47,4 +47,4 @@ async function fetchWorkflowsByPage(query, page = 1, pageSize = 100) {
   }
 }
 
-export default fetchAllWorkflows({ project_id: '9006' })
+export default fetchAllWorkflows({ project_id: '15597' })

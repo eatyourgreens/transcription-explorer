@@ -3,13 +3,9 @@ function titlePages({ subjects, subjectSets, workflows }) {
     const [subjectSetID] = subject.links.subject_sets
     const subjectSet = subjectSets.find(s => s.id == subjectSetID)
     if (subjectSet) {
-      const [workflowID] = subjectSet.links.workflows
-      const workflow = workflows.find(w => w.id == workflowID)
-      if (workflow) {
-        return {
-          href: `/read-davy-notebooks/subjects/${subject.id}`,
-          title: workflow.display_name
-        }
+      return {
+        href: `/transcription-explorer/pmlogan/poets-and-lovers/subjects/${subject.id}`,
+        title: subjectSet.display_name
       }
     }
     return
