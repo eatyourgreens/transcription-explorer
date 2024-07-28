@@ -14,8 +14,8 @@ function ogImage({ subject }) {
   return firstImage['image/jpeg']
 }
 
-function description({ subject, subjectSets, workflows }) {
-  const w = workflow({ subject, subjectSets, workflows })
+function description({ subject, subjectSets, workflows, projects }) {
+  const w = workflow({ subject, subjectSets, workflows, projects })
   const [subjectSetID] = subject.links.subject_sets
   const subjectSet = subjectSets.find(s => s.id == subjectSetID)
   const pageNumber = subject.metadata['#priority']
@@ -25,12 +25,27 @@ function description({ subject, subjectSets, workflows }) {
   return `Notebook not found for page ${pageNumber}`
 }
 
-function workflow({ subject, subjectSets, workflows }) {
+function project({ subject, projects }) {
+  const projectID = subject.links.project
+  if (projectID) {
+    return projects.find(p => p.id === projectID)
+  }
+  return null
+}
+
+function subjectSet({ subject, subjectSets }) {
+  const [subjectSetID] = subject.links.subject_sets
+  return subjectSets.find(s => s.id == subjectSetID)
+}
+
+function workflow({ subject, subjectSets, workflows, projects }) {
+  const subjectProject = project({ subject, subjectSets, projects })
+  const projectWorkflows = workflows.filter(w => subjectProject.links.workflows.includes(w.id))
   const [subjectSetID] = subject.links.subject_sets
   const subjectSet = subjectSets.find(s => s.id == subjectSetID)
   if (subjectSet) {
     const [workflowID] = subjectSet.links.workflows
-    return workflows.find(w => w.id == workflowID)
+    return projectWorkflows.find(w => w.id == workflowID)
   }
   return null
 }
@@ -41,6 +56,8 @@ export default {
     subjectLocations,
     description,
     ogImage,
+    project,
+    subjectSet,
     workflow
   }
 }

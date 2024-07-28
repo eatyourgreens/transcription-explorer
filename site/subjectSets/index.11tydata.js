@@ -4,7 +4,7 @@ function titlePages({ subjects, subjectSets, workflows }) {
     const subjectSet = subjectSets.find(s => s.id == subjectSetID)
     if (subjectSet) {
       return {
-        href: `/transcription-explorer/pmlogan/poets-and-lovers/subjects/${subject.id}`,
+        href: `/transcription-explorer/subjects/${subject.id}`,
         title: subjectSet.display_name
       }
     }
