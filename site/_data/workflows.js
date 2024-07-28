@@ -1,4 +1,5 @@
 import fetchWithRetry from './fetchWithRetry.js'
+import projectIDs from './projectIDs.js'
 
 /*
 Fetches ALL Workflows from a Project.
@@ -47,4 +48,4 @@ async function fetchWorkflowsByPage(query, page = 1, pageSize = 100) {
   }
 }
 
-export default fetchAllWorkflows({ project_id: '15597,15969' })
+export default fetchAllWorkflows({ project_id: projectIDs })

@@ -1,4 +1,5 @@
 import fetchWithRetry from './fetchWithRetry.js'
+import projectIDs from './projectIDs.js'
 
 /*
 Fetches ALL Subject Sets from a Project.
@@ -48,4 +49,4 @@ async function fetchSubjectSetsByPage(query, page = 1, pageSize = 100) {
   }
 }
 
-export default fetchAllSubjectSets({ project_id: '15597,15969' })
+export default fetchAllSubjectSets({ project_id: projectIDs })

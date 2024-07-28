@@ -1,4 +1,5 @@
 import fetchWithRetry from "./fetchWithRetry.js";
+import projectIDs from "./projectIDs.js";
 
 /*
 Fetches a list of Projects from Panoptes.
@@ -19,4 +20,4 @@ async function fetchProjects(query) {
   }
 }
 
-export default fetchProjects({ id: "15597,15969" });
+export default fetchProjects({ id: projectIDs });
