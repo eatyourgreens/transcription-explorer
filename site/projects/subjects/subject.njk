@@ -48,6 +48,6 @@ permalink: "/{{ project.slug }}/subjects/{{ subject.id}}/"
       </ol>
     </nav>
     <script>
-      fetchReductions({{workflow.id}}, {{subject.id}})
+      fetchReductions({{workflow.id}}, {{subject.id}}, {{subject.locations.length}})
     </script>
 </main>

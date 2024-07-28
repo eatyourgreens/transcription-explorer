@@ -82,7 +82,7 @@ function consensusLines(reductions, frame = 0) {
   return reductions.map(reduction => reductionConsensus(reduction, frame)).flat()
 }
 
-async function fetchReductions(workflowID, subjectID) {
+async function fetchReductions(workflowID, subjectID, frames) {
   const query = `{
     workflow(id: ${workflowID}) {
       subject_reductions(subjectId: ${subjectID}, reducerKey:"alice")
@@ -92,8 +92,15 @@ async function fetchReductions(workflowID, subjectID) {
     }
   }`
   const response = await caesarClient.request(query.replace(/\s+/g, ' '))
-  const consensus = await consensusLines(response?.workflow?.subject_reductions)
-  const transcription = consensus.map(line => line.consensusText)
+  const consensus = []
+  for (let frame = 0; frame < frames; frame++) {
+    consensus.push(consensusLines(response.workflow.subject_reductions, frame))
+  }
+  console.log(consensus)
+  const transcription = consensus
+    .flat()
+    .map(line => line.consensusText)
+  console.log(transcription)
   document.getElementById('page-transcription').innerHTML = transcription.join('<br>')
 }
 
