@@ -20,7 +20,7 @@ permalink: "{{ project.slug }}/volumes/"
   <p>{{ project.researcher_quote }}</p>
   <ul>
     {% for link in titlePages %}
-    <li><a href="{{ link.href }}">{{ link.title }}</a></li>
+    <li><a href="{{ link.href }}">{{ link.title }}</a> ({{ link.subjectCount }})</li>
     {% endfor %}
   </ul>
 </main>
