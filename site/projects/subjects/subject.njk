@@ -22,7 +22,7 @@ pagination:
           </a>
         </h2>
         {% for location in subjectLocations %}
-        <img width=300 alt="{{location.alt}}" src="{{location.src}}" />
+          {% image location.src, location.alt %}
         {% endfor %}
       </section>
       <section aria-labelledby="subject-transcription">
