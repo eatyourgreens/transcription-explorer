@@ -9,7 +9,7 @@ pagination:
 permalink: "{{ project.slug }}/volumes/"
 ---
 <main id="notebooks">
-  <h1>Volumes</h1>
+  <h1>{{ project.display_name }}</h1>
   <ul>
     {% for link in titlePages %}
     <li><a href="{{ link.href }}">{{ link.title }}</a></li>
