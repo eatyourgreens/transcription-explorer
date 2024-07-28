@@ -7,7 +7,18 @@ description: Volunteer transcriptions from Zooniverse projects.
   <h1>Transcription projects</h1>
   <ul>
     {% for project in projects %}
-    <li><a href="/transcription-explorer/{{ project.slug }}/volumes/">{{ project.display_name }}</a></li>
+    <li>
+      <div>
+      <h2>
+        <a href="/transcription-explorer/{{ project.slug }}/volumes/">
+          {{ project.display_name }}
+        </a>
+      </h2>
+      <p>
+        {{ project.introduction }}
+      </p>
+      </div>
+    </li>
     {% endfor %}
   </ul>
 </main>
