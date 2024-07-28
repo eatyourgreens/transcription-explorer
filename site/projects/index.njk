@@ -2,7 +2,11 @@
 layout: default
 title: Transcriptions
 description: Transcribed volumes
-permalink: "/pmlogan/poets-and-lovers/volumes/"
+pagination:
+  data: projects
+  size: 1
+  alias: project
+permalink: "{{ project.slug }}/volumes/"
 ---
 <main id="notebooks">
   <h1>Volumes</h1>

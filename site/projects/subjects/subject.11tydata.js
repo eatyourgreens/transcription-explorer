@@ -39,8 +39,8 @@ function subjectSet({ subject, subjectSets }) {
 }
 
 function workflow({ subject, subjectSets, workflows, projects }) {
-  const subjectProject = project({ subject, subjectSets, projects })
-  const projectWorkflows = workflows.filter(w => subjectProject.links.workflows.includes(w.id))
+  const currentProject = project({ subject, projects })
+  const projectWorkflows = workflows.filter(w => currentProject.links.workflows.includes(w.id))
   const [subjectSetID] = subject.links.subject_sets
   const subjectSet = subjectSets.find(s => s.id == subjectSetID)
   if (subjectSet) {
@@ -56,7 +56,6 @@ export default {
     subjectLocations,
     description,
     ogImage,
-    project,
     subjectSet,
     workflow
   }
