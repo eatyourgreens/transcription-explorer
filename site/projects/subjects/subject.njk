@@ -9,7 +9,7 @@ permalink: "/{{ project.slug }}/subjects/{{ subject.id}}/"
 <nav aria-label="Page navigation">
   <ol>
     <li>{% if pagination.href.previous %}<a href="/transcription-explorer{{ pagination.href.previous }}">Previous</a>{% else %}Previous{% endif %}</li>
-    <li><a href="/transcription-explorer/{{ project.slug }}/volumes/">Transcribed Volumes</a></li>
+    <li><a href="/transcription-explorer/{{ project.slug }}/volumes/">{{ project.display_name }}</a></li>
     <li>{% if pagination.href.next %}<a href="/transcription-explorer{{ pagination.href.next }}">Next</a>{% else %}Next{% endif %}</li>
   </ol>
 </nav>
@@ -40,14 +40,14 @@ permalink: "/{{ project.slug }}/subjects/{{ subject.id}}/"
         </dl>
       </section>
     </div>
-    <nav aria-label="Page navigation">
-      <ol>
-        <li>{% if pagination.href.previous %}<a href="/transcription-explorer{{ pagination.href.previous }}">Previous</a>{% else %}Previous{% endif %}</li>
-        <li><a href="/transcription-explorer/{{ project.slug }}/volumes/">Transcribed Volumes</a></li>
-        <li>{% if pagination.href.next %}<a href="/transcription-explorer{{ pagination.href.next }}">Next</a>{% else %}Next{% endif %}</li>
-      </ol>
-    </nav>
     <script>
       fetchReductions({{workflow.id}}, {{subject.id}}, {{subject.locations.length}})
     </script>
 </main>
+<nav aria-label="Page navigation">
+  <ol>
+    <li>{% if pagination.href.previous %}<a href="/transcription-explorer{{ pagination.href.previous }}">Previous</a>{% else %}Previous{% endif %}</li>
+    <li><a href="/transcription-explorer/{{ project.slug }}/volumes/">{{ project.display_name }}</a></li>
+    <li>{% if pagination.href.next %}<a href="/transcription-explorer{{ pagination.href.next }}">Next</a>{% else %}Next{% endif %}</li>
+  </ol>
+</nav>

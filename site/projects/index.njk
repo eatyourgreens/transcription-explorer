@@ -8,6 +8,13 @@ pagination:
   alias: project
 permalink: "{{ project.slug }}/volumes/"
 ---
+<nav aria-label="Project navigation">
+  <ol>
+    <li>{% if pagination.href.previous %}<a href="/transcription-explorer{{ pagination.href.previous }}">Previous</a>{% else %}Previous{% endif %}</li>
+    <li><a href="/transcription-explorer/">Home</a></li>
+    <li>{% if pagination.href.next %}<a href="/transcription-explorer{{ pagination.href.next }}">Next</a>{% else %}Next{% endif %}</li>
+  </ol>
+</nav>
 <main id="notebooks">
   <h1>{{ project.display_name }}</h1>
   <ul>
@@ -16,4 +23,11 @@ permalink: "{{ project.slug }}/volumes/"
     {% endfor %}
   </ul>
 </main>
+<nav aria-label="Project navigation">
+  <ol>
+    <li>{% if pagination.href.previous %}<a href="/transcription-explorer{{ pagination.href.previous }}">Previous</a>{% else %}Previous{% endif %}</li>
+    <li><a href="/transcription-explorer/">Home</a></li>
+    <li>{% if pagination.href.next %}<a href="/transcription-explorer{{ pagination.href.next }}">Next</a>{% else %}Next{% endif %}</li>
+  </ol>
+</nav>
 
