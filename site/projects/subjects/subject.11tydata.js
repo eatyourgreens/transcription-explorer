@@ -57,6 +57,7 @@ export default {
     description,
     ogImage,
     subjectSet,
+    project,
     workflow
   }
 }
