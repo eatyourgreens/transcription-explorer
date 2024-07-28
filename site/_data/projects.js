@@ -19,4 +19,4 @@ async function fetchProjects(query) {
   }
 }
 
-export default fetchProjects({ id: "15597" });
+export default fetchProjects({ id: "15597,15969" });
