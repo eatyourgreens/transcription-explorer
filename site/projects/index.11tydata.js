@@ -3,7 +3,7 @@ function titlePages({ project, subjects, subjectSets }) {
     const subject = subjects.find(s => s.links.subject_sets.includes(subjectSet.id))
     if (subject) {
       return {
-        href: `/transcription-explorer/subjects/${subject.id}`,
+        href: `/transcription-explorer/${project.slug}/subjects/${subject.id}`,
         title: subjectSet.display_name,
         subjectCount: subjectSet.set_member_subjects_count
       }

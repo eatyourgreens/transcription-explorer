@@ -50,6 +50,11 @@ function workflow({ subject, subjectSets, workflows, projects }) {
   return null
 }
 
+function permalink({ projects, subject }) {
+  const currentProject = project({ subject, projects })
+  return `/${currentProject.slug}/subjects/${subject.id}/`
+}
+
 export default {
   eleventyComputed: {
     title: subjectTitle,
@@ -59,5 +64,6 @@ export default {
     subjectSet,
     project,
     workflow
-  }
+  },
+  permalink
 }
