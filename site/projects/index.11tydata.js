@@ -1,8 +1,7 @@
-function titlePages({ subjects, subjectSets, workflows }) {
-  function titlePage(subject) {
-    const [subjectSetID] = subject.links.subject_sets
-    const subjectSet = subjectSets.find(s => s.id == subjectSetID)
-    if (subjectSet) {
+function titlePages({ project, subjects, subjectSets }) {
+  function titlePage(subjectSet) {
+    const subject = subjects.find(s => s.links.subject_sets.includes(subjectSet.id))
+    if (subject) {
       return {
         href: `/transcription-explorer/subjects/${subject.id}`,
         title: subjectSet.display_name
@@ -11,8 +10,9 @@ function titlePages({ subjects, subjectSets, workflows }) {
     return
   }
 
-  const firstPages = subjects.filter(s => s.metadata['#priority'] == '1')
-  return firstPages.map(titlePage).filter(Boolean)
+  return subjectSets
+    .filter(subjectSet => subjectSet.links.project === project.id)
+    .map(titlePage).filter(Boolean)
 }
 
 export default {
