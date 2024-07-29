@@ -2,10 +2,16 @@ function subjectTitle({ subject }) {
   return `Subject ${subject.id}`;
 }
 
+function thumbnail(src, width = 600) {
+  return src
+    ? `https://thumbnails.zooniverse.org/${width}x/${src.replace('https://', '')}`
+    : '';
+}
+
 function subjectLocations({ subject }) {
   return subject.locations.map((loc, index) => ({
     alt: `Page ${index + 1}`,
-    src: loc['image/jpeg']
+    src: thumbnail(loc['image/jpeg'])
   }))
 }
 
