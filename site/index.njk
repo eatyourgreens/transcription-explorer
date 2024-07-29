@@ -8,7 +8,6 @@ description: Volunteer transcriptions from Zooniverse projects.
   <ul>
     {% for project in projects %}
     <li>
-      <div>
       <h2>
         <a href="{{ config.siteRoot }}/{{ project.slug }}/">
           {{ project.display_name }}
@@ -17,7 +16,6 @@ description: Volunteer transcriptions from Zooniverse projects.
       <p>
         {{ project.introduction | markdown | safe }}
       </p>
-      </div>
     </li>
     {% endfor %}
   </ul>

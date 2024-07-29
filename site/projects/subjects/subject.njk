@@ -13,35 +13,35 @@ pagination:
   </ol>
 </nav>
 <main class="subject" aria-labelledby="page-heading">
-    <h1 id="page-heading">{{ workflow.display_name }} {{ subjectSet.display_name }} page {{ subject.metadata['#priority'] }}</h1>
-    <div class="subjectGrid">
-      <section aria-labelledby="subject-heading">
-        <h2 id="subject-heading">
-          <a href="https://www.zooniverse.org/projects/{{ project.slug }}/talk/subjects/{{ subject.id }}">
-            Subject {{ subject.id }}
-          </a>
-        </h2>
-        {% for location in subjectLocations %}
-        <img width=300 alt="{{location.alt}}" src="{{location.src}}" />
-        {% endfor %}
-      </section>
-      <section aria-labelledby="subject-transcription">
-        <h2 id="subject-transcription">Page transcription</h2>
-        <div id="page-transcription"></div>
-      </section>
-      <section aria-labelledby="subject-metadata">
-        <h2 id="subject-metadata">Metadata</h2>
-        <dl>
-        {% for key, value in subject.metadata %}
-          <dt>{{ key }}</dt>
-          <dd>{{ value | dump }}</dd>
-        {% endfor %}
-        </dl>
-      </section>
-    </div>
-    <script>
-      fetchReductions({{workflow.id}}, {{subject.id}}, {{subject.locations.length}})
-    </script>
+  <h1 id="page-heading">{{ workflow.display_name }} {{ subjectSet.display_name }} page {{ subject.metadata['#priority'] }}</h1>
+  <div class="subjectGrid">
+    <section aria-labelledby="subject-heading">
+      <h2 id="subject-heading">
+        <a href="https://www.zooniverse.org/projects/{{ project.slug }}/talk/subjects/{{ subject.id }}">
+          Subject {{ subject.id }}
+        </a>
+      </h2>
+      {% for location in subjectLocations %}
+      <img width=300 alt="{{location.alt}}" src="{{location.src}}" />
+      {% endfor %}
+    </section>
+    <section aria-labelledby="subject-transcription">
+      <h2 id="subject-transcription">Page transcription</h2>
+      <div id="page-transcription"></div>
+    </section>
+    <section aria-labelledby="subject-metadata">
+      <h2 id="subject-metadata">Metadata</h2>
+      <dl>
+      {% for key, value in subject.metadata %}
+        <dt>{{ key }}</dt>
+        <dd>{{ value | dump }}</dd>
+      {% endfor %}
+      </dl>
+    </section>
+  </div>
+  <script>
+    fetchReductions({{workflow.id}}, {{subject.id}}, {{subject.locations.length}})
+  </script>
 </main>
 <nav aria-label="Page navigation">
   <ol>
