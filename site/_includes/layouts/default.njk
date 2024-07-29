@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
   {% PageMetadata page=page, title=title, description=description, ogImage=ogImage %}
-  <link rel="stylesheet" href="/transcription-explorer/css/main.css" />
-  <script src="/transcription-explorer/js/subject.js"></script>
+  <link rel="stylesheet" href="{{ config.siteRoot }}/css/main.css" />
+  <script src="{{ config.siteRoot }}/js/subject.js"></script>
   </head>
   <body>
     {{ content | safe }}

@@ -10,9 +10,9 @@ permalink: "{{ project.slug }}/"
 ---
 <nav aria-label="Project navigation">
   <ol>
-    <li>{% if pagination.href.previous %}<a href="/transcription-explorer{{ pagination.href.previous }}">Previous</a>{% else %}Previous{% endif %}</li>
-    <li><a href="/transcription-explorer/">Home</a></li>
-    <li>{% if pagination.href.next %}<a href="/transcription-explorer{{ pagination.href.next }}">Next</a>{% else %}Next{% endif %}</li>
+    <li>{% if pagination.href.previous %}<a href="{{ config.siteRoot }}{{ pagination.href.previous }}">Previous</a>{% else %}Previous{% endif %}</li>
+    <li><a href="{{ config.siteRoot }}/">Home</a></li>
+    <li>{% if pagination.href.next %}<a href="{{ config.siteRoot }}{{ pagination.href.next }}">Next</a>{% else %}Next{% endif %}</li>
   </ol>
 </nav>
 <main id="notebooks">
@@ -26,9 +26,9 @@ permalink: "{{ project.slug }}/"
 </main>
 <nav aria-label="Project navigation">
   <ol>
-    <li>{% if pagination.href.previous %}<a href="/transcription-explorer{{ pagination.href.previous }}">Previous</a>{% else %}Previous{% endif %}</li>
-    <li><a href="/transcription-explorer/">Home</a></li>
-    <li>{% if pagination.href.next %}<a href="/transcription-explorer{{ pagination.href.next }}">Next</a>{% else %}Next{% endif %}</li>
+    <li>{% if pagination.href.previous %}<a href="{{ config.siteRoot }}{{ pagination.href.previous }}">Previous</a>{% else %}Previous{% endif %}</li>
+    <li><a href="{{ config.siteRoot }}/">Home</a></li>
+    <li>{% if pagination.href.next %}<a href="{{ config.siteRoot }}{{ pagination.href.next }}">Next</a>{% else %}Next{% endif %}</li>
   </ol>
 </nav>
 

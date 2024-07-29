@@ -1,5 +1,7 @@
 import fetchWithRetry from "./fetchWithRetry.js";
-import projectIDs from "./projectIDs.js";
+import config from "./config.js";
+
+const projectIDs = config.projects.join(",");
 
 /*
 Fetches a list of Projects from Panoptes.
