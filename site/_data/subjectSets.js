@@ -51,4 +51,4 @@ async function fetchSubjectSetsByPage(query, page = 1, pageSize = 100) {
   }
 }
 
-export default fetchAllSubjectSets({ project_id: projectIDs })
+export default await fetchAllSubjectSets({ project_id: projectIDs })
