@@ -1,14 +1,10 @@
 function titlePages({ config, project, subjects, subjectSets }) {
   function titlePage(subjectSet) {
-    const subject = subjects.find(s => s.links.subject_sets.includes(subjectSet.id))
-    if (subject) {
-      return {
-        href: `${config.siteRoot}/${project.slug}/subjects/${subject.id}`,
-        title: subjectSet.display_name,
-        subjectCount: subjectSet.set_member_subjects_count
-      }
+    return {
+      href: `${config.siteRoot}/${project.slug}/subjectSets/${subjectSet.id}`,
+      title: subjectSet.display_name,
+      subjectCount: subjectSet.set_member_subjects_count
     }
-    return
   }
 
   return subjectSets

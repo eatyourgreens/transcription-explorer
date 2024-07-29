@@ -47,3 +47,23 @@ nav > ol {
   padding: .5ch;
   outline: 1px solid #ddd;
 }
+
+.thumbnails {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 100px);
+  grid-gap: 1ch;
+  list-style-type: none;
+  padding-inline-start: 0;
+}
+
+.thumbnails > li {
+  background: #fdfdfd;
+  padding: .5ch;
+  outline: 1px solid #ddd;
+}
+
+.thumbnails img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}

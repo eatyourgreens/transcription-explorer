@@ -8,7 +8,7 @@ pagination:
 <nav aria-label="Page navigation">
   <ol>
     <li>{% if pagination.href.previous %}<a href="{{ config.siteRoot }}{{ pagination.href.previous }}">Previous</a>{% else %}Previous{% endif %}</li>
-    <li><a href="{{ config.siteRoot }}/{{ project.slug }}/">{{ project.display_name }}</a></li>
+    <li><a href="{{ config.siteRoot }}/{{ project.slug }}/subjectSets/{{ subjectSet.id }}/">{{ subjectSet.display_name }}</a></li>
     <li>{% if pagination.href.next %}<a href="{{ config.siteRoot }}{{ pagination.href.next }}">Next</a>{% else %}Next{% endif %}</li>
   </ol>
 </nav>
@@ -46,7 +46,7 @@ pagination:
 <nav aria-label="Page navigation">
   <ol>
     <li>{% if pagination.href.previous %}<a href="{{ config.siteRoot }}{{ pagination.href.previous }}">Previous</a>{% else %}Previous{% endif %}</li>
-    <li><a href="{{ config.siteRoot }}/{{ project.slug }}/">{{ project.display_name }}</a></li>
+    <li><a href="{{ config.siteRoot }}/{{ project.slug }}/subjectSets/{{ subjectSet.id }}/">{{ subjectSet.display_name }}</a></li>
     <li>{% if pagination.href.next %}<a href="{{ config.siteRoot }}{{ pagination.href.next }}">Next</a>{% else %}Next{% endif %}</li>
   </ol>
 </nav>
