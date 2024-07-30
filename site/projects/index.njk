@@ -18,6 +18,7 @@ permalink: "{{ project.slug }}/"
 <main id="notebooks">
   <h1>{{ project.display_name }}</h1>
   <p>{{ project.researcher_quote }}</p>
+  <h2>Subject sets</h2>
   <ul>
     {% for link in titlePages %}
     <li><a href="{{ link.href }}">{{ link.title }}</a> ({{ link.subjectCount }})</li>
