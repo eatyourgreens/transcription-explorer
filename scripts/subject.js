@@ -1,47 +1,50 @@
-import { GraphQLClient } from 'graphql-request'
+import { GraphQLClient } from "graphql-request";
 
 function getCaesarClient(env) {
   switch (env) {
-    case 'production': {
-      return new GraphQLClient('https://caesar.zooniverse.org/graphql')
+    case "production": {
+      return new GraphQLClient("https://caesar.zooniverse.org/graphql");
     }
     default: {
-      return new GraphQLClient('https://caesar-staging.zooniverse.org/graphql')
+      return new GraphQLClient("https://caesar-staging.zooniverse.org/graphql");
     }
   }
 }
 
-const caesarClient = getCaesarClient('production')
+const caesarClient = getCaesarClient("production");
 
 function constructCoordinates(line) {
   if (line && line.clusters_x && line.clusters_y) {
-    return line.clusters_x.map((point, i) => ({ x: line.clusters_x[i], y: line.clusters_y[i] }))
+    return line.clusters_x.map((point, i) => ({
+      x: line.clusters_x[i],
+      y: line.clusters_y[i],
+    }));
   }
-  return []
+  return [];
 }
 
 function constructText(line) {
-  const sentences = []
+  const sentences = [];
   if (line && line.clusters_text) {
-    line.clusters_text.forEach(value => {
+    line.clusters_text.forEach((value) => {
       value.forEach((word, i) => {
         if (!sentences[i]) {
-          sentences[i] = []
+          sentences[i] = [];
         }
         if (word && word.length) {
-          sentences[i].push(word)
+          sentences[i].push(word);
         }
-      })
-    })
+      });
+    });
   }
-  return sentences.map(value => value.join(' '));
+  return sentences.map((value) => value.join(" "));
 }
 
 function constructLine(reduction, options) {
-  const { frame, minimumViews, threshold } = options
-  const consensusText = reduction.consensus_text
-  const points = constructCoordinates(reduction)
-  const textOptions = constructText(reduction)
+  const { frame, minimumViews, threshold } = options;
+  const consensusText = reduction.consensus_text;
+  const points = constructCoordinates(reduction);
+  const textOptions = constructText(reduction);
   return {
     consensusReached:
       reduction.consensus_score >= threshold ||
@@ -50,8 +53,8 @@ function constructLine(reduction, options) {
     frame,
     id: reduction.id,
     points,
-    textOptions
-  }
+    textOptions,
+  };
 }
 
 /**
@@ -59,27 +62,30 @@ Generate an array of consensus lines for a single frame.
 */
 function frameConsensus(line, options) {
   if (!line.id) {
-    line.id = 'this is a stub'
+    line.id = "this is a stub";
   }
-  return constructLine(line, options)
+  return constructLine(line, options);
 }
 
 /**
 Generate an array of consensus lines for a single reduction and frame.
 */
 function reductionConsensus(reduction, frame) {
-  const { parameters } = reduction.data
-  const currentFrameReductions = reduction.data[`frame${frame}`] || []
+  const { parameters } = reduction.data;
+  const currentFrameReductions = reduction.data[`frame${frame}`] || [];
   const options = {
     frame,
     minimumViews: parameters?.minimum_views || DEFAULT_VIEWS_TO_RETIRE,
-    threshold: parameters?.low_consensus_threshold || DEFAULT_CONSENSUS_THRESHOLD
-  }
-  return currentFrameReductions.map(line => frameConsensus(line, options))
+    threshold:
+      parameters?.low_consensus_threshold || DEFAULT_CONSENSUS_THRESHOLD,
+  };
+  return currentFrameReductions.map((line) => frameConsensus(line, options));
 }
 
 function consensusLines(reductions, frame = 0) {
-  return reductions.map(reduction => reductionConsensus(reduction, frame)).flat()
+  return reductions
+    .map((reduction) => reductionConsensus(reduction, frame))
+    .flat();
 }
 
 async function fetchReductions(workflowID, subjectID, frames) {
@@ -90,18 +96,20 @@ async function fetchReductions(workflowID, subjectID, frames) {
         data
       }
     }
-  }`
-  const response = await caesarClient.request(query.replace(/\s+/g, ' '))
-  const consensus = []
+  }`;
+  const response = await caesarClient.request(query.replace(/\s+/g, " "));
+  const consensus = [];
   for (let frame = 0; frame < frames; frame++) {
-    consensus.push(consensusLines(response.workflow.subject_reductions, frame))
+    consensus.push(consensusLines(response.workflow.subject_reductions, frame));
   }
-  console.log(consensus)
+  console.log(consensus);
   const transcription = consensus
     .flat()
-    .map(line => line.consensusText)
-  console.log(transcription)
-  document.getElementById('page-transcription').innerHTML = transcription.join('<br>')
+    .sort((a, b) => a.points[0].y - b.points[0].y)
+    .map((line) => line.consensusText);
+  console.log(transcription);
+  document.getElementById("page-transcription").innerHTML =
+    transcription.join("<br>");
 }
 
-window.fetchReductions = fetchReductions
+window.fetchReductions = fetchReductions;
