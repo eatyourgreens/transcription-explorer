@@ -100,20 +100,20 @@ async function fetchReductions(workflowID, subjectID, frames) {
   const response = await caesarClient.request(query.replace(/\s+/g, " "));
   const consensus = [];
   for (let frame = 0; frame < frames; frame++) {
-    consensus.push(consensusLines(response.workflow.subject_reductions, frame));
+    consensus.push(
+      consensusLines(response.workflow.subject_reductions, frame).sort(
+        (a, b) => a.points[0].y - b.points[0].y
+      )
+    );
   }
-  const transcription = consensus
-    .flat()
-    .sort((a, b) => a.points[0].y - b.points[0].y)
-    .map((line) => line.consensusText);
-  document.getElementById("page-transcription").innerHTML =
-    transcription
-      .join("<br>")
-      .replace(/\[superscript\](\w+)\[\/superscript\]/g, "<sup>$1</sup>")
-      .replace(/\[subscript\](\w+)\[\/subscript\]/g, "<sub>$1</sub>")
-      .replace(/\[underline\](\w+)\[\/underline\]/g, "<u>$1</u>")
-      .replace(/\[deletion\](\w+)\[\/deletion\]/g, "<del>$1</del>")
-      .replace(/\[insertion\](\w+)\[\/insertion\]/g, "<ins>$1</ins>");
+  const transcription = consensus.flat().map((line) => line.consensusText);
+  document.getElementById("page-transcription").innerHTML = transcription
+    .join("<br>")
+    .replace(/\[superscript\](\w+)\[\/superscript\]/g, "<sup>$1</sup>")
+    .replace(/\[subscript\](\w+)\[\/subscript\]/g, "<sub>$1</sub>")
+    .replace(/\[underline\](\w+)\[\/underline\]/g, "<u>$1</u>")
+    .replace(/\[deletion\](\w+)\[\/deletion\]/g, "<del>$1</del>")
+    .replace(/\[insertion\](\w+)\[\/insertion\]/g, "<ins>$1</ins>");
 }
 
 window.fetchReductions = fetchReductions;
