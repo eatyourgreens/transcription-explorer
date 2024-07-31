@@ -110,7 +110,8 @@ async function fetchReductions(workflowID, subjectID, frames) {
     transcription
       .join("<br>")
       .replace(/\[superscript\](\w+)\[\/superscript\]/g, "<sup>$1</sup>")
-      .replace(/\[subscript\](\w+)\[\/subscript\]/g, "<sub>$1</sub>");
+      .replace(/\[subscript\](\w+)\[\/subscript\]/g, "<sub>$1</sub>")
+      .replace(/\[underline\](\w+)\[\/underline\]/g, "<u>$1</u>");
 }
 
 window.fetchReductions = fetchReductions;
