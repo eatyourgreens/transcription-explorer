@@ -111,7 +111,9 @@ async function fetchReductions(workflowID, subjectID, frames) {
       .join("<br>")
       .replace(/\[superscript\](\w+)\[\/superscript\]/g, "<sup>$1</sup>")
       .replace(/\[subscript\](\w+)\[\/subscript\]/g, "<sub>$1</sub>")
-      .replace(/\[underline\](\w+)\[\/underline\]/g, "<u>$1</u>");
+      .replace(/\[underline\](\w+)\[\/underline\]/g, "<u>$1</u>")
+      .replace(/\[deletion\](\w+)\[\/deletion\]/g, "<del>$1</del>")
+      .replace(/\[insertion\](\w+)\[\/insertion\]/g, "<ins>$1</ins>");
 }
 
 window.fetchReductions = fetchReductions;
