@@ -102,14 +102,15 @@ async function fetchReductions(workflowID, subjectID, frames) {
   for (let frame = 0; frame < frames; frame++) {
     consensus.push(consensusLines(response.workflow.subject_reductions, frame));
   }
-  console.log(consensus);
   const transcription = consensus
     .flat()
     .sort((a, b) => a.points[0].y - b.points[0].y)
     .map((line) => line.consensusText);
-  console.log(transcription);
   document.getElementById("page-transcription").innerHTML =
-    transcription.join("<br>");
+    transcription
+      .join("<br>")
+      .replace(/\[superscript\](\w+)\[\/superscript\]/g, "<sup>$1</sup>")
+      .replace(/\[subscript\](\w+)\[\/subscript\]/g, "<sub>$1</sub>");
 }
 
 window.fetchReductions = fetchReductions;
