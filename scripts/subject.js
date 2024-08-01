@@ -124,11 +124,10 @@ async function fetchReductions(workflowID, subjectID, frames) {
   const transcription = consensus.flat().map((line) => line.consensusText);
   document.getElementById("page-transcription").innerHTML = transcription
     .join("<br>")
-    .replaceAll(/\[(superscript)\]([\w\s\.]+)\[\/(superscript)\]/g, replaceTags)
-    .replaceAll(/\[(subscript)\]([\w\s\.]+)\[\/(subscript)\]/g, replaceTags)
-    .replaceAll(/\[(underline)\]([\w\s\.]+)\[\/(underline)\]/g, replaceTags)
-    .replaceAll(/\[(deletion)\]([\w\s\.]+)\[\/(deletion)\]/g, replaceTags)
-    .replaceAll(/\[(insertion)\]([\w\s\.]+)\[\/(insertion)\]/g, replaceTags);
+    .replaceAll(
+      /\[(superscript|subscript|underline|deletion|insertion)\]([\w\s\.]+)\[\/(superscript|subscript|underline|deletion|insertion)\]/g,
+      replaceTags
+    );
 }
 
 window.fetchReductions = fetchReductions;
