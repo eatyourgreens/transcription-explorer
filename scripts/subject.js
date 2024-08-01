@@ -133,14 +133,14 @@ async function fetchReductions(workflowID, subjectID, frames) {
   const consensus = [];
   for (let frame = 0; frame < frames; frame++) {
     consensus.push(
-      consensusLines(response.workflow.subject_reductions, frame).sort(
-        (a, b) => a.points[0].y - b.points[0].y
-      )
+      consensusLines(response.workflow.subject_reductions, frame)
+        .sort((a, b) => a.points[0].y - b.points[0].y)
+        .map((line) => `<span class="line">${line.consensusText}</span>`)
+        .join("<br>")
     );
   }
-  const transcription = consensus.flat().map((line) => line.consensusText);
+  const transcription = consensus.join("<br><br>");
   document.getElementById("page-transcription").innerHTML = transcription
-    .join("<br>")
     .replaceAll(taggedTextMatcher("superscript"), replaceTags)
     .replaceAll(taggedTextMatcher("subscript"), replaceTags)
     .replaceAll(taggedTextMatcher("underline"), replaceTags)
