@@ -125,7 +125,7 @@ async function fetchReductions(workflowID, subjectID, frames) {
   document.getElementById("page-transcription").innerHTML = transcription
     .join("<br>")
     .replaceAll(
-      /\[(superscript|subscript|underline|deletion|insertion)\]([\w\s\.]+)\[\/(superscript|subscript|underline|deletion|insertion)\]/g,
+      /\[(superscript|subscript|underline|deletion|insertion)\]([\w\s\.\,\;\(\)\-\+\*\&\%\º]+)\[\/(superscript|subscript|underline|deletion|insertion)\]/g,
       replaceTags
     );
 }
