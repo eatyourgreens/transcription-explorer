@@ -88,6 +88,21 @@ function consensusLines(reductions, frame = 0) {
     .flat();
 }
 
+const HTMLTags = {
+  superscript: "sup",
+  subscript: "sub",
+  underline: "u",
+  deletion: "del",
+  insertion: "ins",
+};
+
+function replaceTags(match, p1, p2, p3) {
+  if (p1 === p3) {
+    return `<${HTMLTags[p1]}>${p2}</${HTMLTags[p3]}>`;
+  }
+  return match;
+}
+
 async function fetchReductions(workflowID, subjectID, frames) {
   const query = `{
     workflow(id: ${workflowID}) {
@@ -109,11 +124,11 @@ async function fetchReductions(workflowID, subjectID, frames) {
   const transcription = consensus.flat().map((line) => line.consensusText);
   document.getElementById("page-transcription").innerHTML = transcription
     .join("<br>")
-    .replace(/\[superscript\]([\w\s\.]+)\[\/superscript\]/g, "<sup>$1</sup>")
-    .replace(/\[subscript\]([\w\s\.]+)\[\/subscript\]/g, "<sub>$1</sub>")
-    .replace(/\[underline\]([\w\s\.]+)\[\/underline\]/g, "<u>$1</u>")
-    .replace(/\[deletion\]([\w\s\.]+)\[\/deletion\]/g, "<del>$1</del>")
-    .replace(/\[insertion\]([\w\s\.]+)\[\/insertion\]/g, "<ins>$1</ins>");
+    .replaceAll(/\[(superscript)\]([\w\s\.]+)\[\/(superscript)\]/g, replaceTags)
+    .replaceAll(/\[(subscript)\]([\w\s\.]+)\[\/(subscript)\]/g, replaceTags)
+    .replaceAll(/\[(underline)\]([\w\s\.]+)\[\/(underline)\]/g, replaceTags)
+    .replaceAll(/\[(deletion)\]([\w\s\.]+)\[\/(deletion)\]/g, replaceTags)
+    .replaceAll(/\[(insertion)\]([\w\s\.]+)\[\/(insertion)\]/g, replaceTags);
 }
 
 window.fetchReductions = fetchReductions;
