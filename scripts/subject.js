@@ -99,7 +99,7 @@ const HTMLTags = {
 function replaceTags(match, p1, p2, p3) {
   if (p1 === p3) {
     if (p1 === "unclear") {
-      return `<mark class="unclear">${p2}</mark>`;
+      return `<mark class="unclear">${p2 || '…'}</mark>`;
     }
     return `<${HTMLTags[p1]}>${p2}</${HTMLTags[p3]}>`;
   }
@@ -128,27 +128,27 @@ async function fetchReductions(workflowID, subjectID, frames) {
   document.getElementById("page-transcription").innerHTML = transcription
     .join("<br>")
     .replaceAll(
-      /\[(superscript)\]([\w\d\s\.\,\;\`\'\"\(\)\-\+\*\&\%\º\[\<\]\>\/]+?)\[\/(superscript)\]/g,
+      /\[(superscript)\]([\w\d\s\.\,\;\`\'\"\(\)\-\+\*\&\%\º\[\<\]\>\/]*?)\[\/(superscript)\]/g,
       replaceTags
     )
     .replaceAll(
-      /\[(subscript)\]([\w\d\s\.\,\;\`\'\"\(\)\-\+\*\&\%\º\[\<\]\>\/]+?)\[\/(subscript)\]/g,
+      /\[(subscript)\]([\w\d\s\.\,\;\`\'\"\(\)\-\+\*\&\%\º\[\<\]\>\/]*?)\[\/(subscript)\]/g,
       replaceTags
     )
     .replaceAll(
-      /\[(underline)\]([\w\d\s\.\,\;\`\'\"\(\)\-\+\*\&\%\º\[\<\]\>\/]+?)\[\/(underline)\]/g,
+      /\[(underline)\]([\w\d\s\.\,\;\`\'\"\(\)\-\+\*\&\%\º\[\<\]\>\/]*?)\[\/(underline)\]/g,
       replaceTags
     )
     .replaceAll(
-      /\[(deletion)\]([\w\d\s\.\,\;\`\'\"\(\)\-\+\*\&\%\º\[\<\]\>\/]+?)\[\/(deletion)\]/g,
+      /\[(deletion)\]([\w\d\s\.\,\;\`\'\"\(\)\-\+\*\&\%\º\[\<\]\>\/]*?)\[\/(deletion)\]/g,
       replaceTags
     )
     .replaceAll(
-      /\[(insertion)\]([\w\d\s\.\,\;\`\'\"\(\)\-\+\*\&\%\º\[\<\]\>\/]+?)\[\/(insertion)\]/g,
+      /\[(insertion)\]([\w\d\s\.\,\;\`\'\"\(\)\-\+\*\&\%\º\[\<\]\>\/]*?)\[\/(insertion)\]/g,
       replaceTags
     )
     .replaceAll(
-      /\[(unclear)\]([\w\d\s\.\,\;\`\'\"\(\)\-\+\*\&\%\º\[\<\]\>\/]+?)\[\/(unclear)\]/g,
+      /\[(unclear)\]([\w\d\s\.\,\;\`\'\"\(\)\-\+\*\&\%\º\[\<\]\>\/]*?)\[\/(unclear)\]/g,
       replaceTags
     );
 }
