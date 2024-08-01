@@ -99,11 +99,25 @@ const HTMLTags = {
 function replaceTags(match, p1, p2, p3) {
   if (p1 === p3) {
     if (p1 === "unclear") {
-      return `<mark class="unclear">${p2 || '…'}</mark>`;
+      return `<mark class="unclear">${p2 || "…"}</mark>`;
     }
     return `<${HTMLTags[p1]}>${p2}</${HTMLTags[p3]}>`;
   }
   return match;
+}
+
+/**
+ * Match tagged snippets of the form [tagName]text[/tagName], including empty tags.
+ * @param {string} tagName
+ * @returns a regular expression to match a tagged text snippet
+ */
+function taggedTextMatcher(tagName) {
+  const textMatcher =
+    "([\\w\\d\\s\\.\\,\\;\\`\\'\\\"\\!\\(\\)\\-\\+\\*\\&\\%\\º\\[\\<\\]\\>\\/]*?)";
+  return new RegExp(
+    `\\[(${tagName})\\]${textMatcher}\\[\\/(${tagName})\\]`,
+    "g"
+  );
 }
 
 async function fetchReductions(workflowID, subjectID, frames) {
@@ -127,30 +141,12 @@ async function fetchReductions(workflowID, subjectID, frames) {
   const transcription = consensus.flat().map((line) => line.consensusText);
   document.getElementById("page-transcription").innerHTML = transcription
     .join("<br>")
-    .replaceAll(
-      /\[(superscript)\]([\w\d\s\.\,\;\`\'\"\!\(\)\-\+\*\&\%\º\[\<\]\>\/]*?)\[\/(superscript)\]/g,
-      replaceTags
-    )
-    .replaceAll(
-      /\[(subscript)\]([\w\d\s\.\,\;\`\'\"\!\(\)\-\+\*\&\%\º\[\<\]\>\/]*?)\[\/(subscript)\]/g,
-      replaceTags
-    )
-    .replaceAll(
-      /\[(underline)\]([\w\d\s\.\,\;\`\'\"\!\(\)\-\+\*\&\%\º\[\<\]\>\/]*?)\[\/(underline)\]/g,
-      replaceTags
-    )
-    .replaceAll(
-      /\[(deletion)\]([\w\d\s\.\,\;\`\'\"\!\(\)\-\+\*\&\%\º\[\<\]\>\/]*?)\[\/(deletion)\]/g,
-      replaceTags
-    )
-    .replaceAll(
-      /\[(insertion)\]([\w\d\s\.\,\;\`\'\"\!\(\)\-\+\*\&\%\º\[\<\]\>\/]*?)\[\/(insertion)\]/g,
-      replaceTags
-    )
-    .replaceAll(
-      /\[(unclear)\]([\w\d\s\.\,\;\`\'\"\!\(\)\-\+\*\&\%\º\[\<\]\>\/]*?)\[\/(unclear)\]/g,
-      replaceTags
-    );
+    .replaceAll(taggedTextMatcher("superscript"), replaceTags)
+    .replaceAll(taggedTextMatcher("subscript"), replaceTags)
+    .replaceAll(taggedTextMatcher("underline"), replaceTags)
+    .replaceAll(taggedTextMatcher("deletion"), replaceTags)
+    .replaceAll(taggedTextMatcher("insertion"), replaceTags)
+    .replaceAll(taggedTextMatcher("unclear"), replaceTags);
 }
 
 window.fetchReductions = fetchReductions;
