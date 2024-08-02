@@ -109,16 +109,26 @@ function replaceTags(match, p1, p2, p3) {
 }
 
 /**
+ * Escape special characters in a regular expression.
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions#escaping
+ * @param {string} string 
+ * @returns string with special characters escaped.
+ */
+function escapeRegExp(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
+}
+
+/**
  * Match tagged snippets of the form [tagName]text fragment[/tagName], including empty tags.
  * @param {string} tagName
  * @returns a regular expression to match a tagged text snippet.
  */
 function taggedTextMatcher(tagName) {
-  const allowedPunctuation = String.raw`\.\,\;\:\?\`\'\"\!\(\)\-\+\*\=\&\%\º`;
-  const tagDelimiters = String.raw`\[\]\<\>\/`;
-  const textMatcher = String.raw`[\w\d\s${allowedPunctuation}${tagDelimiters}]`;
+  const punctuationMatcher = String.raw`${escapeRegExp('.,;:?`\'"!()-+*=&%º')}`;
+  const nestedTagMatcher = String.raw`${escapeRegExp('[]<>/')}`;
+  const textFragmentMatcher = String.raw`[\w\d\s${punctuationMatcher}${nestedTagMatcher}]`;
   return new RegExp(
-    String.raw`\[(${tagName})\](${textMatcher}*?)\[\/(${tagName})\]`,
+    String.raw`\[(${tagName})\](${textFragmentMatcher}*?)\[\/(${tagName})\]`,
     "g"
   );
 }
@@ -142,6 +152,7 @@ async function fetchReductions(workflowID, subjectID, frames) {
         .join("<br>")
     );
   }
+  console.log(taggedTextMatcher("superscript"));
   const transcription = consensus
     .join("<br><br>")
     .replaceAll(taggedTextMatcher("superscript"), replaceTags)
