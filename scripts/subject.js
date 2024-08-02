@@ -94,14 +94,16 @@ const HTMLTags = {
   underline: "u",
   deletion: "del",
   insertion: "ins",
+  unclear: "mark",
 };
 
 function replaceTags(match, p1, p2, p3) {
   if (p1 === p3) {
-    if (p1 === "unclear") {
-      return `<mark class="unclear">${p2 || "…"}</mark>`;
+    const tag = HTMLTags[p1];
+    if (tag === "mark") {
+      return `<mark class="${p1}">${p2 || "…"}</mark>`;
     }
-    return `<${HTMLTags[p1]}>${p2}</${HTMLTags[p3]}>`;
+    return `<${tag}>${p2}</${tag}>`;
   }
   return match;
 }
