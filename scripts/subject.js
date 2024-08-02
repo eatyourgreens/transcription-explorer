@@ -97,9 +97,18 @@ const HTMLTags = {
   unclear: "mark",
 };
 
+/**
+ * Rewrite [tag] text fragment[/tag] as a HTML fragment.
+ * eg. 28[superscript]th[/superscript] becomes 28<sup>th</sup>.
+ * @param {string} match the full matched string.
+ * @param {string} p1 the opening tag.
+ * @param {string} p2 tagged text fragment.
+ * @param {string} p3 the closing tag.
+ * @returns A HTML string, or the original string if the matched tags are invalid.
+ */
 function replaceTags(match, p1, p2, p3) {
-  if (p1 === p3) {
-    const tag = HTMLTags[p1];
+  const tag = HTMLTags[p1];
+  if (tag && p1 === p3) {
     if (tag === "mark") {
       return `<mark class="${p1}">${p2 || "…"}</mark>`;
     }
@@ -152,7 +161,6 @@ async function fetchReductions(workflowID, subjectID, frames) {
         .join("<br>")
     );
   }
-  console.log(taggedTextMatcher("superscript"));
   const transcription = consensus
     .join("<br><br>")
     .replaceAll(taggedTextMatcher("superscript"), replaceTags)
