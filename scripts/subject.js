@@ -124,7 +124,7 @@ function replaceTags(match, p1, p2, p3) {
  * @returns string with special characters escaped.
  */
 function escapeRegExp(string) {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
+  return string.replace(/[.*+-?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
 }
 
 /**
