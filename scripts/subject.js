@@ -112,7 +112,7 @@ function replaceTags(match, p1, p2, p3) {
  * @returns a regular expression to match a tagged text snippet
  */
 function taggedTextMatcher(tagName) {
-  const allowedPunctuation = "\\.\\,\\;\\:\\?\\`\\'\\\"\\!\\(\\)\\-\\+\\*\\&\\%\\º";
+  const allowedPunctuation = "\\.\\,\\;\\:\\?\\`\\'\\\"\\!\\(\\)\\-\\+\\*\\=\\&\\%\\º";
   const tagDelimiters = "\\[\\]\\<\\>\\/";
   const textMatcher = `[\\w\\d\\s${allowedPunctuation}${tagDelimiters}]`;
   return new RegExp(
