@@ -109,16 +109,16 @@ function replaceTags(match, p1, p2, p3) {
 }
 
 /**
- * Match tagged snippets of the form [tagName]text[/tagName], including empty tags.
+ * Match tagged snippets of the form [tagName]text fragment[/tagName], including empty tags.
  * @param {string} tagName
- * @returns a regular expression to match a tagged text snippet
+ * @returns a regular expression to match a tagged text snippet.
  */
 function taggedTextMatcher(tagName) {
-  const allowedPunctuation = "\\.\\,\\;\\:\\?\\`\\'\\\"\\!\\(\\)\\-\\+\\*\\=\\&\\%\\º";
-  const tagDelimiters = "\\[\\]\\<\\>\\/";
-  const textMatcher = `[\\w\\d\\s${allowedPunctuation}${tagDelimiters}]`;
+  const allowedPunctuation = String.raw`\.\,\;\:\?\`\'\"\!\(\)\-\+\*\=\&\%\º`;
+  const tagDelimiters = String.raw`\[\]\<\>\/`;
+  const textMatcher = String.raw`[\w\d\s${allowedPunctuation}${tagDelimiters}]`;
   return new RegExp(
-    `\\[(${tagName})\\](${textMatcher}*?)\\[\\/(${tagName})\\]`,
+    String.raw`\[(${tagName})\](${textMatcher}*?)\[\/(${tagName})\]`,
     "g"
   );
 }
@@ -142,14 +142,15 @@ async function fetchReductions(workflowID, subjectID, frames) {
         .join("<br>")
     );
   }
-  const transcription = consensus.join("<br><br>");
-  document.getElementById("page-transcription").innerHTML = transcription
+  const transcription = consensus
+    .join("<br><br>")
     .replaceAll(taggedTextMatcher("superscript"), replaceTags)
     .replaceAll(taggedTextMatcher("subscript"), replaceTags)
     .replaceAll(taggedTextMatcher("underline"), replaceTags)
     .replaceAll(taggedTextMatcher("deletion"), replaceTags)
     .replaceAll(taggedTextMatcher("insertion"), replaceTags)
     .replaceAll(taggedTextMatcher("unclear"), replaceTags);
+  document.getElementById("page-transcription").innerHTML = transcription;
 }
 
 window.fetchReductions = fetchReductions;
