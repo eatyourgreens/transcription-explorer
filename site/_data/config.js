@@ -6,6 +6,7 @@ const projects = [
     14978,
     12856,
     9006,
+    4973
 ];
 export default {
     siteRoot,
