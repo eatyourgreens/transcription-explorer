@@ -1,4 +1,4 @@
-import fetchWithRetry from './fetchWithRetry.js'
+import fetchWithRetry from '../helpers/fetchWithRetry.js';
 import config from "./config.js";
 
 const projectIDs = config.projects.join(",");
