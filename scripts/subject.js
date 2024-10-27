@@ -154,13 +154,26 @@ async function fetchReductions(workflowID, subjectID, frames) {
   const response = await caesarClient.request(query.replace(/\s+/g, " "));
   const consensus = [];
   for (let frame = 0; frame < frames; frame++) {
-    consensus.push(
-      consensusLines(response.workflow.subject_reductions, frame)
-        .sort((a, b) => a.points[0].y - b.points[0].y)
-        .map((line) => `<span class="line">${line.consensusText}</span>`)
-        .join("<br>")
-    );
+    const framePages = [
+      [],
+      [],
+    ];
+    const sortedLines = consensusLines(response.workflow.subject_reductions, frame)
+    .sort((a, b) => a.points[0].y - b.points[0].y);
+    const maxX = Math.max(...sortedLines.map((line) => line.points[1].x)) + 20;
+    sortedLines.forEach((line) => {
+      const pageIndex = line.points[0].x < maxX / 2 ? 0 : 1;
+      framePages[pageIndex].push(line);
+    });
+    framePages.forEach((page) => {
+      consensus.push(
+        page
+          .map((line) => `<span class="line">${line.consensusText}</span>`)
+          .join("<br>")
+      );
+    });
   }
+
   const transcription = consensus
     .join("<br><br>")
     .replaceAll(taggedTextMatcher("superscript"), replaceTags)
