@@ -175,6 +175,7 @@ async function fetchReductions(workflowID, subjectID, frames) {
   }
 
   const transcription = consensus
+    .filter(Boolean)
     .join("<br><br>")
     .replaceAll(taggedTextMatcher("superscript"), replaceTags)
     .replaceAll(taggedTextMatcher("subscript"), replaceTags)
