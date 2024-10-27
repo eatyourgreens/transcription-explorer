@@ -23,7 +23,7 @@ jobs:
           cache: 'npm'
 
       - run: npm ci
-      - run: npx eleventy
+      - run: npx eleventy --quiet
 
       - name: upload files
         uses: actions/upload-pages-artifact@v3
