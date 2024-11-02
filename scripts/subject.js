@@ -142,6 +142,13 @@ function taggedTextMatcher(tagName) {
   );
 }
 
+function renderLineWithOptions({ consensusText, textOptions }) {
+  return `<details>
+    <summary>${consensusText}</summary>
+    ${textOptions.map((textOption) => `<span class="line">${textOption}</span>`).join("<br>")}
+    </details>`;
+} 
+
 async function fetchReductions(workflowID, subjectID, frames) {
   const query = `{
     workflow(id: ${workflowID}) {
@@ -168,8 +175,8 @@ async function fetchReductions(workflowID, subjectID, frames) {
     framePages.forEach((page) => {
       consensus.push(
         page
-          .map((line) => `<span class="line">${line.consensusText}</span>`)
-          .join("<br>")
+          .map(renderLineWithOptions)
+          .join("")
       );
     });
   }
