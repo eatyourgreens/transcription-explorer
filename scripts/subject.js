@@ -145,7 +145,9 @@ function taggedTextMatcher(tagName) {
 function renderLineWithOptions({ consensusText, textOptions }) {
   return `<details>
     <summary>${consensusText}</summary>
-    ${textOptions.map((textOption) => `<span class="line">${textOption}</span>`).join("<br>")}
+    <ul>
+    ${textOptions.map((textOption) => `<li class="line">${textOption}</li>`).join("\n")}
+    </ul>
     </details>`;
 } 
 
