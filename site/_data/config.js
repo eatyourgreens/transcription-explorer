@@ -1,6 +1,6 @@
 const siteRoot = process.env.SITE_ROOT || '';
 const projects = [
-    21982, // Documentation Detectives
+    // 21982, // Documentation Detectives
     17426, // PRINT
     15597, // Poets & Lovers
     15969, // Maria Edgeworth Letters
