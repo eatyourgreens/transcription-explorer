@@ -1,7 +1,6 @@
 const siteRoot = process.env.SITE_ROOT || '';
 const projects = [
-    21982, // Documentation Detectives
-    /* 17426, // PRINT
+    17426, // PRINT
     15597, // Poets & Lovers
     15969, // Maria Edgeworth Letters
     15591, // People's Contest Digital Archive
@@ -10,7 +9,6 @@ const projects = [
     9006, // Davy Notebooks
     5481, // Deciphering Secrets
     4973 // Anti-Slavery Manuscripts
-    */
 ];
 export default {
     siteRoot,
