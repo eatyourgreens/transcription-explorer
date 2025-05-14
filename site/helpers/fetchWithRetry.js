@@ -36,8 +36,8 @@ function fetchWithDelay(endpoint, query, delay = DELAY) {
 
 export default async function fetchWithRetry(endpoint, query = {}, retryCount = 0, delay = 0) {
   try {
+    const queryParams = Object.entries(query).map(([key, value]) => `${key}=${value}`)
     if (retryCount > 0) {
-      const queryParams = Object.entries(query).map(([key, value]) => `${key}=${value}`)
       console.log(`retrying ${endpoint}?${queryParams.join('&')}, attempt: ${retryCount}`)
     }
     const body = await fetchWithDelay(endpoint, query, delay)

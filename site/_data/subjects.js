@@ -1,5 +1,5 @@
 import fetchWithRetry from "../helpers/fetchWithRetry.js";
-import config from "./config.js";
+import subjectSets from "./subjectSets.js";
 
 /*
 Fetches ALL Subjects from a Project.
@@ -44,13 +44,16 @@ async function fetchSubjectsByPage(query, page = 1, pageSize = 100) {
   } catch (err) {
     console.error("ERROR: fetchSubjectsByPage()");
     console.error("- error: ", err);
-    console.error("- args: ", projectId, page, pageSize);
+    console.error("- args: ", query.subject_set_id, page, pageSize);
     throw err;
   }
 }
+
 const subjects = await Promise.all(
-  config.projects.map(
-    async (projectID) => await fetchAllSubjects({ project_id: projectID })
+  subjectSets.map(
+    async (subjectSet) => await fetchAllSubjects({ subject_set_id: subjectSet.id })
   )
 );
-export default subjects.flat();
+// dedupe by subject.id.
+const subjectMap = new Map(subjects.flat().map((subject) => [subject.id, subject]));
+export default [...subjectMap.values()];
